@@ -1,1 +1,10 @@
-<h2 class="text-3xl font-bold underline">Welcome to {{title}}</h2>
+<app-header></app-header>
+
+<div class="container mt-6">
+    <h2 class="text-3xl font-bold underline">Welcome to {{title}}</h2>
+    <ul>
+       @for (task of tasks; track task.id) {
+        <li>{{task.title}} - {{task.description}}</li>
+       } 
+    </ul>
+</div>
