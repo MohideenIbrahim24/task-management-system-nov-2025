@@ -2,6 +2,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./layout/header/header.component";
 import { HttpClient } from '@angular/common/http';
+import { Task } from './shared/models/task';
+import { Pagination } from './shared/models/pagination';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +16,10 @@ export class AppComponent implements OnInit {
   private http = inject(HttpClient);
   // protected readonly title = signal('client');
   title = 'Task Management System';
-  tasks: any[] = [];
+  tasks: Task[] = [];
 
   ngOnInit(): void{
-    this.http.get<any>(this.baseUrl + 'Tasks').subscribe({
+    this.http.get<Pagination<Task>>(this.baseUrl + 'Tasks').subscribe({
       next: tasks => this.tasks = tasks.items,
       error: err => console.log(err),
       complete: () => console.log('Request completed')
